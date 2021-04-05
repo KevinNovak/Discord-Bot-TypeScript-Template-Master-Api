@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
     IsDefined,
     IsInt,
@@ -57,6 +58,7 @@ export class RegisterClusterRequest {
 
     @IsDefined()
     @ValidateNested()
+    @Type(() => Callback)
     callback: Callback;
 }
 

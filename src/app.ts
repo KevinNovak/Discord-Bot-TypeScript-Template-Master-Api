@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import { Api } from './api';
 import { ClustersController, RootController } from './controllers';
 import { UpdateClusterCacheJob } from './jobs';
