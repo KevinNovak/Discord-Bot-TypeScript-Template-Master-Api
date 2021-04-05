@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import router from 'express-promise-router';
-import uuid from 'uuid';
+import * as uuid from 'uuid';
 
 import { ClusterCache } from '../caches';
 import { mapClass } from '../middleware';
