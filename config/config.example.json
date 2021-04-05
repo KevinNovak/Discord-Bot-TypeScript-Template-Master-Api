@@ -1,0 +1,16 @@
+{
+    "api": {
+        "port": 5000,
+        "secret": "00000000-0000-0000-0000-000000000000"
+    },
+    "jobs": {
+        "updateClusterCache": {
+            "schedule": "0 */1 * * * *",
+            "log": false
+        },
+        "updateServerCount": {
+            "schedule": "0 */5 * * * *",
+            "log": true
+        }
+    }
+}
