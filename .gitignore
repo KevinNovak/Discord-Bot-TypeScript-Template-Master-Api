@@ -4,7 +4,7 @@
 dist
 config/**/*.json
 !config/**/*.example.json
-caches
+.cache
 
 # =====================================================
 # Node.js
