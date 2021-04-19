@@ -41,7 +41,7 @@ export interface ClusterStats {
 
 export class Callback {
     @IsDefined()
-    @IsUrl()
+    @IsUrl({ require_tld: false })
     url: string;
 
     @IsDefined()
