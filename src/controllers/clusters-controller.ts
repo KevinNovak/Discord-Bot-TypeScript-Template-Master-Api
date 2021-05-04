@@ -16,11 +16,14 @@ import {
 } from '../models/master-api';
 import { Controller } from './controller';
 
+let Config = require('../../config/config.json');
+
 export class ClustersController implements Controller {
     public path = '/clusters';
     public router: Router = router();
+    public authToken: string = Config.api.secret;
 
-    constructor() {
+    public register(): void {
         this.router.get(this.path, (req, res) => this.getClusters(req, res));
         this.router.post(this.path, mapClass(RegisterClusterRequest), (req, res) =>
             this.registerCluster(req, res)
