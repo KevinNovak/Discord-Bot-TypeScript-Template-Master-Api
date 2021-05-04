@@ -25,7 +25,7 @@ export class ClustersController implements Controller {
 
     public register(): void {
         this.router.get('/', (req, res) => this.getClusters(req, res));
-        this.router.post(this.path, mapClass(RegisterClusterRequest), (req, res) =>
+        this.router.post('/', mapClass(RegisterClusterRequest), (req, res) =>
             this.registerCluster(req, res)
         );
         this.router.put('/:id/login', (req, res) => this.loginCluster(req, res));
