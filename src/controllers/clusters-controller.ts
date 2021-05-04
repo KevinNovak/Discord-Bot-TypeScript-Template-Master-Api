@@ -24,13 +24,13 @@ export class ClustersController implements Controller {
     public authToken: string = Config.api.secret;
 
     public register(): void {
-        this.router.get(this.path, (req, res) => this.getClusters(req, res));
+        this.router.get('/', (req, res) => this.getClusters(req, res));
         this.router.post(this.path, mapClass(RegisterClusterRequest), (req, res) =>
             this.registerCluster(req, res)
         );
-        this.router.put(`${this.path}/:id/login`, (req, res) => this.loginCluster(req, res));
-        this.router.put(`${this.path}/:id/ready`, (req, res) => this.readyCluster(req, res));
-        this.router.delete(`${this.path}/:id`, (req, res) => this.unregisterCluster(req, res));
+        this.router.put('/:id/login', (req, res) => this.loginCluster(req, res));
+        this.router.put('/:id/ready', (req, res) => this.readyCluster(req, res));
+        this.router.delete('/:id', (req, res) => this.unregisterCluster(req, res));
     }
 
     private async getClusters(req: Request, res: Response): Promise<void> {
