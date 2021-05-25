@@ -115,6 +115,7 @@ export class ClustersController implements Controller {
         let cluster = ClusterCache.get(clusterId);
         if (!cluster) {
             res.sendStatus(404);
+            return;
         }
 
         // Change status to LOGGING_IN
@@ -136,6 +137,7 @@ export class ClustersController implements Controller {
         let cluster = ClusterCache.get(clusterId);
         if (!cluster) {
             res.sendStatus(404);
+            return;
         }
 
         // Change status to READY
