@@ -57,8 +57,6 @@ export class UpdateClusterCacheJob implements Job {
                 } else {
                     cluster.status = ClusterStatus.ERROR;
                 }
-
-                continue;
             }
 
             ClusterCache.set(cluster.id, cluster);
