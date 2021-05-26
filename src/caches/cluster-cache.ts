@@ -27,7 +27,8 @@ export class ClusterCache {
     }
 
     public static save(): void {
-        this.cache.save();
+        // "true" prevents pruning of unvisited keys
+        this.cache.save(true);
     }
 
     public static online(): Cluster[] {
