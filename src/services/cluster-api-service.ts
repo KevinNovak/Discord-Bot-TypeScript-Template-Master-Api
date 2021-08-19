@@ -17,7 +17,7 @@ export class ClusterApiService {
             throw res;
         }
 
-        return await res.json();
+        return res.json();
     }
 
     public async setShardPresences(
@@ -43,6 +43,6 @@ export class ClusterApiService {
             throw res;
         }
 
-        return await res.json();
+        return res.json();
     }
 }
