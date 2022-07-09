@@ -1,11 +1,12 @@
 import { Request, Response, Router } from 'express';
 import router from 'express-promise-router';
+import { createRequire } from 'node:module';
 import * as uuid from 'uuid';
 
-import { ClusterCache } from '../caches';
-import { mapClass } from '../middleware';
-import { Cluster } from '../models/cache-models';
-import { ClusterStatus } from '../models/enums';
+import { ClusterCache } from '../caches/index.js';
+import { mapClass } from '../middleware/index.js';
+import { Cluster } from '../models/cache-models.js';
+import { ClusterStatus } from '../models/enums/index.js';
 import {
     ClusterInfo,
     GetClustersResponse,
@@ -13,9 +14,10 @@ import {
     RegisterClusterRequest,
     RegisterClusterResponse,
     ShardInfo,
-} from '../models/master-api';
-import { Controller } from './controller';
+} from '../models/master-api/index.js';
+import { Controller } from './controller.js';
 
+const require = createRequire(import.meta.url);
 let Config = require('../../config/config.json');
 
 export class ClustersController implements Controller {

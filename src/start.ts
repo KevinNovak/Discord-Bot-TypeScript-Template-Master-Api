@@ -1,11 +1,13 @@
+import { createRequire } from 'node:module';
 import 'reflect-metadata';
 
-import { Api } from './api';
-import { ClustersController, RootController } from './controllers';
-import { UpdateClusterCacheJob } from './jobs';
-import { UpdateServerCountJob } from './jobs/update-server-count-job';
-import { ClusterApiService, HttpService, JobService, Logger } from './services';
+import { Api } from './api.js';
+import { ClustersController, RootController } from './controllers/index.js';
+import { UpdateClusterCacheJob } from './jobs/index.js';
+import { UpdateServerCountJob } from './jobs/update-server-count-job.js';
+import { ClusterApiService, HttpService, JobService, Logger } from './services/index.js';
 
+const require = createRequire(import.meta.url);
 let Logs = require('../lang/logs.json');
 
 async function start(): Promise<void> {

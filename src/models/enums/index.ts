@@ -1,1 +1,1 @@
-export { ClusterStatus } from './cluster-status';
+export { ClusterStatus } from './cluster-status.js';

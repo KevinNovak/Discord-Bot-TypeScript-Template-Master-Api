@@ -1,10 +1,13 @@
-import { ClusterCache } from '../caches';
-import { BotSite } from '../models/config-models';
-import { ClusterApiService, HttpService, Logger } from '../services';
-import { Job } from './job';
+import { createRequire } from 'node:module';
 
-let Config = require('../../config/config.json');
+import { ClusterCache } from '../caches/index.js';
+import { BotSite } from '../models/config-models.js';
+import { ClusterApiService, HttpService, Logger } from '../services/index.js';
+import { Job } from './job.js';
+
+const require = createRequire(import.meta.url);
 let BotSites: BotSite[] = require('../../config/bot-sites.json');
+let Config = require('../../config/config.json');
 let Lang = require('../../lang/lang.json');
 let Logs = require('../../lang/logs.json');
 

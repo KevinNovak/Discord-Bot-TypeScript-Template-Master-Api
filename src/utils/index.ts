@@ -1,1 +1,1 @@
-export { MathUtils } from './math-utils';
+export { MathUtils } from './math-utils.js';

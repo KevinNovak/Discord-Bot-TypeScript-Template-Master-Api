@@ -9,8 +9,8 @@ import {
     ValidateNested,
 } from 'class-validator';
 
-import { ShardStats } from '../cluster-api';
-import { ClusterStatus } from '../enums';
+import { ShardStats } from '../cluster-api/index.js';
+import { ClusterStatus } from '../enums/index.js';
 
 export interface GetClustersResponse {
     clusters: ClusterInfo[];

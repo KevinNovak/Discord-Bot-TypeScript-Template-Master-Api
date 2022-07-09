@@ -1,1 +1,1 @@
-export { ClusterCache } from './cluster-cache';
+export { ClusterCache } from './cluster-cache.js';

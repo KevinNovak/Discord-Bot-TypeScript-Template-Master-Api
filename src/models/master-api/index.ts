@@ -6,4 +6,4 @@ export {
     RegisterClusterRequest,
     RegisterClusterResponse,
     LoginClusterResponse,
-} from './clusters';
+} from './clusters.js';

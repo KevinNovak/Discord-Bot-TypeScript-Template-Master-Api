@@ -1,11 +1,11 @@
-import { URL } from 'url';
+import { URL } from 'node:url';
 
-import { HttpService } from '.';
 import {
     GetGuildsResponse,
     GetShardsResponse,
     SetShardPresencesRequest,
-} from '../models/cluster-api';
+} from '../models/cluster-api/index.js';
+import { HttpService } from './index.js';
 
 export class ClusterApiService {
     constructor(private httpService: HttpService) {}
@@ -17,7 +17,7 @@ export class ClusterApiService {
             throw res;
         }
 
-        return res.json();
+        return (await res.json()) as GetShardsResponse;
     }
 
     public async setShardPresences(
@@ -43,6 +43,6 @@ export class ClusterApiService {
             throw res;
         }
 
-        return res.json();
+        return (await res.json()) as GetGuildsResponse;
     }
 }

@@ -1,9 +1,12 @@
 import { FetchError } from 'node-fetch';
-import { ClusterCache } from '../caches';
-import { ClusterStatus } from '../models/enums';
-import { ClusterApiService, Logger } from '../services';
-import { Job } from './job';
+import { createRequire } from 'node:module';
 
+import { ClusterCache } from '../caches/index.js';
+import { ClusterStatus } from '../models/enums/index.js';
+import { ClusterApiService, Logger } from '../services/index.js';
+import { Job } from './job.js';
+
+const require = createRequire(import.meta.url);
 let Config = require('../../config/config.json');
 let Logs = require('../../lang/logs.json');
 

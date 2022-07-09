@@ -1,5 +1,5 @@
-import { GetGuildsResponse, GetShardsResponse } from './cluster-api';
-import { ClusterStatus } from './enums';
+import { GetGuildsResponse, GetShardsResponse } from './cluster-api/index.js';
+import { ClusterStatus } from './enums/index.js';
 
 export interface Cluster {
     id: string;

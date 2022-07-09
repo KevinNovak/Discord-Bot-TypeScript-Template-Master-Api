@@ -1,3 +1,3 @@
-export { ClustersController } from './clusters-controller';
-export { Controller } from './controller';
-export { RootController } from './root-controller';
+export { ClustersController } from './clusters-controller.js';
+export { Controller } from './controller.js';
+export { RootController } from './root-controller.js';

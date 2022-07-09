@@ -24,5 +24,6 @@
         "regexes",
         "respawn",
         "varchar"
-    ]
+    ],
+    "typescript.preferences.importModuleSpecifierEnding": "js"
 }
