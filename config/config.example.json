@@ -12,5 +12,8 @@
             "schedule": "0 */5 * * * *",
             "log": true
         }
+    },
+    "logging": {
+        "pretty": true
     }
 }

@@ -13,14 +13,15 @@
     },
     "cSpell.enabled": true,
     "cSpell.words": [
-        "Novak",
         "bot's",
         "datas",
         "discordbotlist",
         "discordlabs",
         "filesize",
+        "Novak",
         "ondiscord",
         "parens",
+        "pino",
         "regexes",
         "respawn",
         "varchar"
