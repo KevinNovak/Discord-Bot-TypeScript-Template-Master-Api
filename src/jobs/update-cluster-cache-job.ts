@@ -51,7 +51,7 @@ export class UpdateClusterCacheJob implements Job {
                     : ClusterStatus.ONLINE;
             } catch (error) {
                 Logger.error(
-                    Logs.error.updateClusterCache.replace('{CLUSTER_ID}', cluster.id),
+                    Logs.error.updateClusterCache.replaceAll('{CLUSTER_ID}', cluster.id),
                     error
                 );
 

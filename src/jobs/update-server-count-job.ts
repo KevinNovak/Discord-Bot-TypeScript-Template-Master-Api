@@ -33,7 +33,7 @@ export class UpdateServerCountJob implements Job {
                     cluster.callback.token,
                     {
                         type: Lang.serverCount.type,
-                        name: Lang.serverCount.name.replace(
+                        name: Lang.serverCount.name.replaceAll(
                             '{SERVER_COUNT}',
                             serverCount.toLocaleString()
                         ),
@@ -42,7 +42,7 @@ export class UpdateServerCountJob implements Job {
                 );
             } catch (error) {
                 Logger.error(
-                    Logs.error.updateClusterPresence.replace('{CLUSTER_ID}', cluster.id),
+                    Logs.error.updateClusterPresence.replaceAll('{CLUSTER_ID}', cluster.id),
                     error
                 );
                 continue;
@@ -50,13 +50,13 @@ export class UpdateServerCountJob implements Job {
         }
 
         Logger.info(
-            Logs.info.updatedServerCount.replace('{SERVER_COUNT}', serverCount.toLocaleString())
+            Logs.info.updatedServerCount.replaceAll('{SERVER_COUNT}', serverCount.toLocaleString())
         );
 
         for (let botSite of this.botSites) {
             try {
                 let body = JSON.parse(
-                    botSite.body.replace('{{SERVER_COUNT}}', serverCount.toString())
+                    botSite.body.replaceAll('{{SERVER_COUNT}}', serverCount.toString())
                 );
                 let res = await this.httpService.post(botSite.url, botSite.authorization, body);
 
@@ -65,13 +65,13 @@ export class UpdateServerCountJob implements Job {
                 }
             } catch (error) {
                 Logger.error(
-                    Logs.error.updateServerCountSite.replace('{BOT_SITE}', botSite.name),
+                    Logs.error.updateServerCountSite.replaceAll('{BOT_SITE}', botSite.name),
                     error
                 );
                 continue;
             }
 
-            Logger.info(Logs.info.updateServerCountSite.replace('{BOT_SITE}', botSite.name));
+            Logger.info(Logs.info.updateServerCountSite.replaceAll('{BOT_SITE}', botSite.name));
         }
     }
 }
