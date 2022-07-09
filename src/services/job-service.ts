@@ -1,4 +1,4 @@
-import schedule from 'node-schedule/index.js';
+import schedule from 'node-schedule';
 import { createRequire } from 'node:module';
 
 import { Job } from '../jobs/index.js';
