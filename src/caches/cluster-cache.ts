@@ -52,7 +52,7 @@ export class ClusterCache {
 
     public static totalShards(): number {
         let maxShardId = this.maxShardId();
-        return maxShardId ? maxShardId + 1 : 0;
+        return maxShardId !== undefined ? maxShardId + 1 : 0;
     }
 
     public static serverCount(): number {
