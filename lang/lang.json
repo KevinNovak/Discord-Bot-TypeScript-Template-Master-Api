@@ -1,6 +1,6 @@
 {
     "serverCount": {
-        "type": "STREAMING",
+        "type": "Streaming",
         "name": "to {SERVER_COUNT} servers",
         "url": "https://www.twitch.tv/novakevin"
     }
