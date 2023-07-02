@@ -24,6 +24,7 @@ export class UpdateServerCountJob implements Job {
 
     public async run(): Promise<void> {
         let serverCount = ClusterCache.serverCount();
+        let shardCount = ClusterCache.totalShards();
 
         let clusters = ClusterCache.online();
         for (let cluster of clusters) {
@@ -56,7 +57,9 @@ export class UpdateServerCountJob implements Job {
         for (let botSite of this.botSites) {
             try {
                 let body = JSON.parse(
-                    botSite.body.replaceAll('{{SERVER_COUNT}}', serverCount.toString())
+                    botSite.body
+                        .replaceAll('{{SERVER_COUNT}}', serverCount.toString())
+                        .replaceAll('{{SHARD_COUNT}}', shardCount.toString())
                 );
                 let res = await this.httpService.post(botSite.url, botSite.authorization, body);
 
