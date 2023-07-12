@@ -1,16 +1,16 @@
 import { FetchError } from 'node-fetch';
 import { createRequire } from 'node:module';
 
+import { Job } from './index.js';
 import { ClusterCache } from '../caches/index.js';
 import { ClusterStatus } from '../models/enums/index.js';
 import { ClusterApiService, Logger } from '../services/index.js';
-import { Job } from './job.js';
 
 const require = createRequire(import.meta.url);
 let Config = require('../../config/config.json');
 let Logs = require('../../lang/logs.json');
 
-export class UpdateClusterCacheJob implements Job {
+export class UpdateClusterCacheJob extends Job {
     public name = 'Update Cluster Cache';
     public schedule: string = Config.jobs.updateClusterCache.schedule;
     public log: boolean = Config.jobs.updateClusterCache.log;
@@ -22,7 +22,9 @@ export class UpdateClusterCacheJob implements Job {
         ClusterStatus.ERROR,
     ];
 
-    constructor(private clusterApiService: ClusterApiService) {}
+    constructor(private clusterApiService: ClusterApiService) {
+        super();
+    }
 
     public async run(): Promise<void> {
         let clusters = ClusterCache.getAll().filter(cluster =>

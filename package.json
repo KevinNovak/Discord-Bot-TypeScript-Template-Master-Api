@@ -30,9 +30,11 @@
     "dependencies": {
         "class-transformer": "0.5.1",
         "class-validator": "0.14.0",
+        "cron-parser": "^4.8.1",
         "express": "4.18.2",
         "express-promise-router": "^4.1.1",
         "flat-cache": "3.0.4",
+        "luxon": "^3.3.0",
         "node-fetch": "3.3.1",
         "node-schedule": "2.1.1",
         "pino": "8.14.1",
