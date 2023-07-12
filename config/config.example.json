@@ -10,7 +10,9 @@
         },
         "updateServerCount": {
             "schedule": "0 */5 * * * *",
-            "log": true
+            "log": true,
+            "runOnce": false,
+            "initialDelaySecs": 0
         }
     },
     "logging": {
