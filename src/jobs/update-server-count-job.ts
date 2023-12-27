@@ -20,7 +20,10 @@ export class UpdateServerCountJob extends Job {
 
     private botSites: BotSite[];
 
-    constructor(private clusterApiService: ClusterApiService, private httpService: HttpService) {
+    constructor(
+        private clusterApiService: ClusterApiService,
+        private httpService: HttpService
+    ) {
         super();
         this.botSites = BotSites.filter(botSite => botSite.enabled);
     }
