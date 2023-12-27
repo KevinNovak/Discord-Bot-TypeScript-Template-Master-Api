@@ -3,6 +3,7 @@ import router from 'express-promise-router';
 import { createRequire } from 'node:module';
 import * as uuid from 'uuid';
 
+import { Controller } from './controller.js';
 import { ClusterCache } from '../caches/index.js';
 import { mapClass } from '../middleware/index.js';
 import { Cluster } from '../models/cache-models.js';
@@ -15,7 +16,6 @@ import {
     RegisterClusterResponse,
     ShardInfo,
 } from '../models/master-api/index.js';
-import { Controller } from './controller.js';
 
 const require = createRequire(import.meta.url);
 let Config = require('../../config/config.json');

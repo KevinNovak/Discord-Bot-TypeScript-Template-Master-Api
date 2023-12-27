@@ -1,11 +1,11 @@
 import { URL } from 'node:url';
 
+import { HttpService } from './index.js';
 import {
     GetGuildsResponse,
     GetShardsResponse,
     SetShardPresencesRequest,
 } from '../models/cluster-api/index.js';
-import { HttpService } from './index.js';
 
 export class ClusterApiService {
     constructor(private httpService: HttpService) {}
