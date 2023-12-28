@@ -17,6 +17,7 @@ export class UpdateClusterCacheJob extends Job {
 
     private updateStatuses = [
         ClusterStatus.READY,
+        ClusterStatus.PARTIALLY_ONLINE,
         ClusterStatus.ONLINE,
         ClusterStatus.OFFLINE,
         ClusterStatus.ERROR,
