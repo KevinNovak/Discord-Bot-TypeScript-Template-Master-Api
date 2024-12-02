@@ -33,6 +33,7 @@ export class ClustersController implements Controller {
         this.router.put('/:id/login', (req, res) => this.loginCluster(req, res));
         this.router.put('/:id/ready', (req, res) => this.readyCluster(req, res));
         this.router.delete('/:id', (req, res) => this.unregisterCluster(req, res));
+        this.router.delete('/', (req, res) => this.unregisterAllClusters(req, res));
     }
 
     private async getClusters(req: Request, res: Response): Promise<void> {
@@ -155,6 +156,14 @@ export class ClustersController implements Controller {
 
         // Remove cluster
         ClusterCache.remove(clusterId);
+
+        // Send response
+        res.sendStatus(200);
+    }
+
+    private async unregisterAllClusters(req: Request, res: Response): Promise<void> {
+        // Remove all clusters
+        ClusterCache.removeAll();
 
         // Send response
         res.sendStatus(200);

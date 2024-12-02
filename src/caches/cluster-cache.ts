@@ -30,6 +30,10 @@ export class ClusterCache {
         this.cache.removeKey(clusterId);
     }
 
+    public static removeAll(): void {
+        this.cache.clear();
+    }
+
     public static save(): void {
         // "true" prevents pruning of unvisited keys
         this.cache.save(true);
