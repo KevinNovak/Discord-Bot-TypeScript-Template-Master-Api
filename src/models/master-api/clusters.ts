@@ -62,7 +62,14 @@ export class RegisterClusterRequest {
     callback: Callback;
 }
 
-export interface RegisterClusterResponse {
+export class RegisterClustersRequest {
+    @IsDefined()
+    @ValidateNested()
+    @Type(() => RegisterClusterRequest)
+    clusters: RegisterClusterRequest[];
+}
+
+export interface RegisterClustersResponse {
     id: string;
 }
 

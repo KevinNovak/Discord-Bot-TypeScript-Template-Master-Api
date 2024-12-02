@@ -13,7 +13,8 @@ import {
     GetClustersResponse,
     LoginClusterResponse,
     RegisterClusterRequest,
-    RegisterClusterResponse,
+    RegisterClustersRequest,
+    RegisterClustersResponse,
     ShardInfo,
 } from '../models/master-api/index.js';
 
@@ -27,8 +28,8 @@ export class ClustersController implements Controller {
 
     public register(): void {
         this.router.get('/', (req, res) => this.getClusters(req, res));
-        this.router.post('/', mapClass(RegisterClusterRequest), (req, res) =>
-            this.registerCluster(req, res)
+        this.router.post('/', mapClass(RegisterClustersRequest), (req, res) =>
+            this.registerClusters(req, res)
         );
         this.router.put('/:id/login', (req, res) => this.loginCluster(req, res));
         this.router.put('/:id/ready', (req, res) => this.readyCluster(req, res));
@@ -72,9 +73,19 @@ export class ClustersController implements Controller {
         res.status(200).json(resBody);
     }
 
-    private async registerCluster(req: Request, res: Response): Promise<void> {
-        let reqBody: RegisterClusterRequest = res.locals.input;
+    private async registerClusters(req: Request, res: Response): Promise<void> {
+        let reqBody: RegisterClustersRequest = res.locals.input;
 
+        let newIds = reqBody.clusters.map(async (req: RegisterClusterRequest) => await this.processClusterRegristration(req))
+
+        // Send response
+        let resBody: RegisterClustersResponse = {
+            id: newIds.join(', '),
+        };
+        res.status(200).json(resBody);
+    }
+
+    private async processClusterRegristration(reqBody: RegisterClusterRequest): Promise<number> {
         // Remove old data if previously registered
         let oldCluster = ClusterCache.getAll().find(
             cluster => cluster.callback.url === reqBody.callback.url
@@ -104,11 +115,7 @@ export class ClustersController implements Controller {
         };
         ClusterCache.set(newCluster.id, newCluster);
 
-        // Send response
-        let resBody: RegisterClusterResponse = {
-            id: newCluster.id,
-        };
-        res.status(200).json(resBody);
+        return newCluster.id;
     }
 
     private async loginCluster(req: Request, res: Response): Promise<void> {
