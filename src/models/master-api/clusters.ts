@@ -76,4 +76,5 @@ export interface RegisterClustersResponse {
 export interface LoginClusterResponse {
     shardList: number[];
     totalShards: number;
+    token: string;
 }

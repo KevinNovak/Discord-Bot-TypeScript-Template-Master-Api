@@ -136,6 +136,7 @@ export class ClustersController implements Controller {
         let resBody: LoginClusterResponse = {
             shardList: cluster.allocatedShardIds,
             totalShards: ClusterCache.totalShards(),
+            token: Config.client.token,
         };
         res.status(200).json(resBody);
     }
