@@ -76,13 +76,13 @@ export class ClustersController implements Controller {
     private async registerClusters(req: Request, res: Response): Promise<void> {
         let reqBody: RegisterClustersRequest = res.locals.input;
 
-        let newIds = reqBody.clusters.map(async (req: RegisterClusterRequest) =>
+        let newIds = reqBody.clusters.map((req: RegisterClusterRequest) =>
             this.processClusterRegristration(req)
         );
 
         // Send response
         let resBody: RegisterClustersResponse = {
-            id: newIds.join(', '),
+            ids: newIds.join(', '),
         };
         res.status(200).json(resBody);
     }

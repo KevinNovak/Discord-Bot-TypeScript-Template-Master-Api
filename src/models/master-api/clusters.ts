@@ -70,7 +70,7 @@ export class RegisterClustersRequest {
 }
 
 export interface RegisterClustersResponse {
-    id: string;
+    ids: string;
 }
 
 export interface LoginClusterResponse {
