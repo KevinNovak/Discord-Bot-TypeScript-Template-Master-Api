@@ -64,7 +64,7 @@ export class RegisterClusterRequest {
 
 export class RegisterClustersRequest {
     @IsDefined()
-    @ValidateNested()
+    @ValidateNested({ each: true })
     @Type(() => RegisterClusterRequest)
     clusters: RegisterClusterRequest[];
 }

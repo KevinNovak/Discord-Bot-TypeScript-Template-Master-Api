@@ -76,7 +76,9 @@ export class ClustersController implements Controller {
     private async registerClusters(req: Request, res: Response): Promise<void> {
         let reqBody: RegisterClustersRequest = res.locals.input;
 
-        let newIds = reqBody.clusters.map(async (req: RegisterClusterRequest) => await this.processClusterRegristration(req))
+        let newIds = reqBody.clusters.map(async (req: RegisterClusterRequest) =>
+            this.processClusterRegristration(req)
+        );
 
         // Send response
         let resBody: RegisterClustersResponse = {
@@ -85,7 +87,7 @@ export class ClustersController implements Controller {
         res.status(200).json(resBody);
     }
 
-    private async processClusterRegristration(reqBody: RegisterClusterRequest): Promise<number> {
+    private processClusterRegristration(reqBody: RegisterClusterRequest): string {
         // Remove old data if previously registered
         let oldCluster = ClusterCache.getAll().find(
             cluster => cluster.callback.url === reqBody.callback.url
