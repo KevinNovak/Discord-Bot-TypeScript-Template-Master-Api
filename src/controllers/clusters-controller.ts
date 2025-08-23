@@ -13,7 +13,8 @@ import {
     GetClustersResponse,
     LoginClusterResponse,
     RegisterClusterRequest,
-    RegisterClusterResponse,
+    RegisterClustersRequest,
+    RegisterClustersResponse,
     ShardInfo,
 } from '../models/master-api/index.js';
 
@@ -27,12 +28,13 @@ export class ClustersController implements Controller {
 
     public register(): void {
         this.router.get('/', (req, res) => this.getClusters(req, res));
-        this.router.post('/', mapClass(RegisterClusterRequest), (req, res) =>
-            this.registerCluster(req, res)
+        this.router.post('/', mapClass(RegisterClustersRequest), (req, res) =>
+            this.registerClusters(req, res)
         );
         this.router.put('/:id/login', (req, res) => this.loginCluster(req, res));
         this.router.put('/:id/ready', (req, res) => this.readyCluster(req, res));
         this.router.delete('/:id', (req, res) => this.unregisterCluster(req, res));
+        this.router.delete('/', (req, res) => this.unregisterAllClusters(req, res));
     }
 
     private async getClusters(req: Request, res: Response): Promise<void> {
@@ -71,9 +73,21 @@ export class ClustersController implements Controller {
         res.status(200).json(resBody);
     }
 
-    private async registerCluster(req: Request, res: Response): Promise<void> {
-        let reqBody: RegisterClusterRequest = res.locals.input;
+    private async registerClusters(req: Request, res: Response): Promise<void> {
+        let reqBody: RegisterClustersRequest = res.locals.input;
 
+        let newIds = reqBody.clusters.map((req: RegisterClusterRequest) =>
+            this.processClusterRegristration(req)
+        );
+
+        // Send response
+        let resBody: RegisterClustersResponse = {
+            ids: newIds.join(', '),
+        };
+        res.status(200).json(resBody);
+    }
+
+    private processClusterRegristration(reqBody: RegisterClusterRequest): string {
         // Remove old data if previously registered
         let oldCluster = ClusterCache.getAll().find(
             cluster => cluster.callback.url === reqBody.callback.url
@@ -103,11 +117,7 @@ export class ClustersController implements Controller {
         };
         ClusterCache.set(newCluster.id, newCluster);
 
-        // Send response
-        let resBody: RegisterClusterResponse = {
-            id: newCluster.id,
-        };
-        res.status(200).json(resBody);
+        return newCluster.id;
     }
 
     private async loginCluster(req: Request, res: Response): Promise<void> {
@@ -128,6 +138,7 @@ export class ClustersController implements Controller {
         let resBody: LoginClusterResponse = {
             shardList: cluster.allocatedShardIds,
             totalShards: ClusterCache.totalShards(),
+            token: Config.client.token,
         };
         res.status(200).json(resBody);
     }
@@ -155,6 +166,14 @@ export class ClustersController implements Controller {
 
         // Remove cluster
         ClusterCache.remove(clusterId);
+
+        // Send response
+        res.sendStatus(200);
+    }
+
+    private async unregisterAllClusters(req: Request, res: Response): Promise<void> {
+        // Remove all clusters
+        ClusterCache.removeAll();
 
         // Send response
         res.sendStatus(200);

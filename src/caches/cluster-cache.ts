@@ -1,4 +1,4 @@
-import flatCache, { Cache } from 'flat-cache';
+import { create } from 'flat-cache';
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -6,10 +6,10 @@ import { Cluster } from '../models/cache-models.js';
 import { ClusterStatus } from '../models/enums/index.js';
 
 export class ClusterCache {
-    private static cache: Cache = flatCache.load(
-        'clusters',
-        path.join(dirname(fileURLToPath(import.meta.url)), '../../.cache')
-    );
+    private static cache = create({
+        cacheId: 'clusters',
+        cacheDir: path.join(dirname(fileURLToPath(import.meta.url)), '../../.cache'),
+    });
 
     public static getAll(): Cluster[] {
         return this.cache
@@ -28,6 +28,10 @@ export class ClusterCache {
 
     public static remove(clusterId: string): void {
         this.cache.removeKey(clusterId);
+    }
+
+    public static removeAll(): void {
+        this.cache.clear();
     }
 
     public static save(): void {

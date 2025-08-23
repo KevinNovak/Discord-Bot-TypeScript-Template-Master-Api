@@ -1,4 +1,7 @@
 {
+    "client": {
+        "token": "<DISCORD_BOT_TOKEN>"
+    },
     "api": {
         "port": 5000,
         "secret": "00000000-0000-0000-0000-000000000000"

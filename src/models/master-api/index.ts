@@ -4,6 +4,7 @@ export {
     ShardInfo,
     ClusterStats,
     RegisterClusterRequest,
-    RegisterClusterResponse,
+    RegisterClustersRequest,
+    RegisterClustersResponse,
     LoginClusterResponse,
 } from './clusters.js';

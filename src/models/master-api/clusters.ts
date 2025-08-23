@@ -62,11 +62,19 @@ export class RegisterClusterRequest {
     callback: Callback;
 }
 
-export interface RegisterClusterResponse {
-    id: string;
+export class RegisterClustersRequest {
+    @IsDefined()
+    @ValidateNested({ each: true })
+    @Type(() => RegisterClusterRequest)
+    clusters: RegisterClusterRequest[];
+}
+
+export interface RegisterClustersResponse {
+    ids: string;
 }
 
 export interface LoginClusterResponse {
     shardList: number[];
     totalShards: number;
+    token: string;
 }
